@@ -1,0 +1,10 @@
+{
+	"name": "simple-file-server",
+	"version": "0.0.1",
+	"private": "true",
+	"dependencies": {
+		"express": "3.3.8",
+		"jade": "0.35.0",
+		"mime-magic": "5.14.0"
+	}
+}

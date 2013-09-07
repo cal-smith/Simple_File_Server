@@ -1,0 +1,59 @@
+doctype 5
+html(lang="en", xmlns:svg="http://www.w3.org/2000/svg")
+	head
+		title= Stuff
+		link(rel='stylesheet', href="/main.css")
+		script(type='text/javascript', src="/jquery.js")
+		script(type='text/javascript', src="/jquery.knob.js")
+		script(type='text/javascript', src="/jquery.ui.widget.js")
+		script(type='text/javascript', src="/jquery.iframe-transport.js")
+		script(type='text/javascript', src="/jquery.fileupload.js")
+		script(type='text/javascript').
+			$(document).ready(function() {
+				$('.upload').click(function(){
+					$(".file").click();
+				});
+				
+				$(".prog").knob();
+
+				$('#upload').fileupload({
+					add: function(e, data){
+						var jqXHR = data.submit();
+						$(".progress").show();
+					},
+					progress: function(e, data){
+						var progress = parseInt(data.loaded/data.total*100,10);
+						$(".prog").val(progress).change();
+						if(progress == 100){
+							$(".progress").hide();
+						}
+					},
+					fail: function(e, data){
+						//alert("...");
+					},
+					done: function(e, data){
+						window.location = data.result.location;
+					}
+				});
+			});
+	body
+		div.top
+			.title Files
+			form#upload(method="post", action="/upload", enctype="multipart/form-data")
+				a.upload
+					span.progress
+						input.prog(type="text" value="0" data-width="50" data-height="50" data-fgColor="#0788a5" data-readOnly="1" data-bgColor="#3e4043")
+					span Upload
+				input.file(type="file" name="upload")
+		div.top2
+		div.image
+			if image
+				img.img(src="/files/#{image}")
+				.smallimg
+						img.small(src="/files/#{image}")
+			else if audio
+				audio(src="/files/#{audio}" controls preload="auto")
+			else
+				//img(src="/test.png")
+				img(src="/test1.jpg")
+				//img(src="/test2.jpg")
