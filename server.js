@@ -18,6 +18,16 @@ app.get('/image/:name', function(req, res){
 	res.render('index', {image: name})
 });
 
+app.get('/audio/:name', function(req, res){
+	var name = req.params.name;
+	res.render('index', {audio: name})
+});
+
+app.get('/download/:name', function(req, res){
+	var name = req.params.name;
+	res.render('index', {download: name})
+});
+
 app.post('/upload', function(req, res, err){
 	var path = req.files.upload.path;
 	console.log(path);
@@ -26,12 +36,31 @@ app.post('/upload', function(req, res, err){
 		if(err){
 			console.error(err.message);
 		} if(type.indexOf('image') != -1){
-			console.log("search");
 			var position = path.search(/files/i)+6;
 			var name = path.slice(position);
 			name = '/image/'+ name;
 			console.log(name);
 			res.json({status: 'success', location: name});
+		} if(type.indexOf('audio') != -1){
+			var position = path.search(/files/i)+6;
+			var name = path.slice(position);
+			var new_location = __dirname + "/public/files/audio/" + name;
+			console.log(new_location);
+			fs.rename(path, new_location, function(){
+				name = '/audio/'+ name;
+				console.log(name);
+				res.json({status: 'success', location: name});
+			});
+		} if(type.indexOf('text') != -1 || type.indexOf('application') != -1){
+			var position = path.search(/files/i)+6;
+			var name = path.slice(position);
+			var new_location = __dirname + "/public/files/download/" + name;
+			console.log(new_location);
+			fs.rename(path, new_location, function(){
+				name = '/download/'+ name;
+				console.log(name);
+				res.json({status: 'success', location: name});
+			});
 		}
 	});
 });

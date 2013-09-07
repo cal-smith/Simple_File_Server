@@ -52,8 +52,15 @@ html(lang="en", xmlns:svg="http://www.w3.org/2000/svg")
 				.smallimg
 						img.small(src="/files/#{image}")
 			else if audio
-				audio(src="/files/#{audio}" controls preload="auto")
+				img.img(src="/test1.jpg")
+				.smallimg
+					audio.audio(src="/files/audio/#{audio}" controls preload="auto")
+			else if download
+				img.img(src="/test1.jpg")
+				.smallimg
+					.download
+						a(href="/files/download/#{download}") Download File
 			else
 				//img(src="/test.png")
-				img(src="/test1.jpg")
+				img.img(src="/test1.jpg")
 				//img(src="/test2.jpg")
