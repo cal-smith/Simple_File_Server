@@ -50,6 +50,8 @@ body{
 	float: left;
 	left: 10px;
 	font-size: 50px;
+	color: #000;
+	text-decoration: none;
 }
 
 .upload{
@@ -110,7 +112,7 @@ body{
 	position: relative;
 	max-height: 80%;
 	max-width: 90%;
-	top: 10px;
+	top: 35px;
 	opacity: 1.0;
 	margin: auto;
 	border: 9px solid rgba(255, 255, 255, 0.3);
