@@ -105,7 +105,11 @@ body{
 	display: -moz-flex;
 	display: -ms-flex;
 	display: -webkit-flex;
-	flex-direction: column;
+}
+
+.grid-flex{
+	display: block;
+	margin: auto;
 }
 
 .small {
@@ -116,6 +120,15 @@ body{
 	opacity: 1.0;
 	margin: auto;
 	border: 9px solid rgba(255, 255, 255, 0.3);
+}
+
+.grid{
+	position: relative;
+	float: left;
+	max-width: 300px;
+	margin: 15px 15px;
+	border: 9px solid rgba(255, 255, 255, 0.3);
+	top: 85px;
 }
 
 .audio{
